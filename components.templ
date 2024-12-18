@@ -1,0 +1,10 @@
+package main
+
+import (
+  "fmt"
+)
+
+templ card_image(suit Suit, variant SuitVariant) {
+  {{ file := fmt.Sprintf("/assets/%s_%s.svg", suit.String(), variant.String()) }}
+  <img src={ file }> 
+}
