@@ -197,7 +197,7 @@ type Shoe struct {
 	cards []Card
 }
 
-func (s Shoe) remove() Card {
+func (s *Shoe) remove() Card {
 	if len(s.cards) > 0 {
 		card := s.cards[len(s.cards)-1]
 		s.cards = s.cards[:len(s.cards)-1]
@@ -229,16 +229,18 @@ type Hand struct {
 	cards []Card
 }
 
-func (h Hand) hit(shoe Shoe) {
+func (h *Hand) hit(shoe *Shoe) {
 	h.cards = append(h.cards, shoe.remove())
 }
 
-func (h Hand) deal(shoe Shoe) {
-	h.cards = []Card{shoe.remove(), shoe.remove()}
+func (h *Hand) deal(shoe *Shoe) {
+	card1 := shoe.remove()
+	card2 := shoe.remove()
+	h.cards = []Card{card1, card2}
 }
 
-func new_hand(shoe Shoe) Hand {
+func new_hand() Hand {
 	return Hand{
-		cards: []Card{shoe.remove(), shoe.remove()},
+		cards: []Card{},
 	}
 }

@@ -18,6 +18,11 @@ templ home() {
 templ basic_play() {
 	@head()
 	@navbar()
+	{{
+		shoe := new_shoe(6)
+		hand := new_hand()
+		hand.deal(&shoe)
+	}}
 	<style>
 		.center {
 			display: flex;
@@ -27,10 +32,6 @@ templ basic_play() {
 	</style>
 	<div class="center">
 		<div>
-			{{
-					shoe := new_shoe(6)
-					hand := new_hand(shoe)
-			}}
 			<h3>practice basic play:</h3>
 			<style>
 				.hand  {

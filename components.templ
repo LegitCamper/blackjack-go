@@ -64,5 +64,5 @@ templ card_image(card Card) {
 
 script onHit(shoe Shoe, hand Hand) {
 	console.log(hand);
-	{{ hand.hit(shoe) }}
+	hand.hit(shoe);
 }
