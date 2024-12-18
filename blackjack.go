@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand/v2"
 )
 
@@ -126,7 +127,7 @@ func (s SuitVariant) String() string {
 }
 
 func random_suit_variant() SuitVariant {
-	variant := rand.IntN(13)
+	variant := rand.IntN(12)
 	switch variant {
 	case 0:
 		return Ace
@@ -164,9 +165,80 @@ type Card struct {
 	variant SuitVariant
 }
 
+func (c Card) file() string {
+	return fmt.Sprintf("/assets/%s_%s.svg", c.suit.String(), c.variant.String())
+}
+
 func random_card() Card {
 	return Card{
 		suit:    random_suit(),
 		variant: random_suit_variant(),
+	}
+}
+
+func deck() []Card {
+	suits := []Suit{Clubs, Diamonds, Hearts, Spades}
+	variants := []SuitVariant{Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, King}
+
+	var deck []Card
+	for _, suit := range suits {
+		for _, variant := range variants {
+			deck = append(deck, Card{
+				suit:    suit,
+				variant: variant,
+			})
+		}
+	}
+
+	return deck
+}
+
+type Shoe struct {
+	cards []Card
+}
+
+func (s Shoe) remove() Card {
+	if len(s.cards) > 0 {
+		card := s.cards[len(s.cards)-1]
+		s.cards = s.cards[:len(s.cards)-1]
+		return card
+	} else {
+		panic("not enough cards")
+	}
+}
+
+func new_shoe(decks int) Shoe {
+	cards := []Card{}
+
+	for d := 0; d < decks; d++ {
+		cards = append(cards, deck()...)
+	}
+
+	// shuffle
+	for i := range cards {
+		j := rand.IntN(i + 1)
+		cards[i], cards[j] = cards[j], cards[i]
+	}
+
+	return Shoe{
+		cards: cards,
+	}
+}
+
+type Hand struct {
+	cards []Card
+}
+
+func (h Hand) hit(shoe Shoe) {
+	h.cards = append(h.cards, shoe.remove())
+}
+
+func (h Hand) deal(shoe Shoe) {
+	h.cards = []Card{shoe.remove(), shoe.remove()}
+}
+
+func new_hand(shoe Shoe) Hand {
+	return Hand{
+		cards: []Card{shoe.remove(), shoe.remove()},
 	}
 }

@@ -1,54 +1,67 @@
 package main
 
-templ head() {
-	<head>
-		<meta charset="UTF-8"/>
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<title>Blackjack Trainer</title>
-		<style>
-        	body {
-        	    padding: 25px;
-        	    background-color: #24273a;
-        	    color: black;
-        	    font-size: 25px;
-        	}
-			p {
-				color: #cad3f5
-			}
-    	</style>
-	</head>
-}
-
 templ home() {
 	@head()
-	@topnav()
+	@navbar()
 	<style>
-		.home_main{
+		.home{
 			display: flex;
   			justify-content: center;
   			align-items: center;
 		}
 	</style>
-	<div class="home_main">
+	<div class="home">
 		<p>"Welcome to blackjsck assistant and trainer"</p>
 	</div>
 }
 
 templ basic_play() {
 	@head()
-	@topnav()
-	<p>basic play</p>
-	@card_image(random_suit(), random_suit_variant())
+	@navbar()
 	<style>
-		.choices {
-			position:absolute;
-			bottom:0;
+		.center {
+			display: flex;
+  			justify-content: center;
+  			align-items: center;
 		}
 	</style>
-	<div class="choices">
-		<button type="button">Click Me!</button>
+	<div class="center">
+		<div>
+			{{
+					shoe := new_shoe(6)
+					hand := new_hand(shoe)
+			}}
+			<h3>practice basic play:</h3>
+			<style>
+				.hand  {
+					padding 20px;
+				}
+			</style>
+			<div class="hand">
+				for _, card := range hand.cards {
+					@card_image(card)
+				}
+			</div>
+			<style>
+				.choices {
+					display: flex;
+  					justify-content: center;
+  					align-items: center;
+				}
+				.choices button {
+					// background-color: #04AA6D; /* Green */
+  					border: none;
+  					// color: white;
+  					padding: 20px 32px;
+  					text-align: center;
+  					font-size: 16px;
+					margin: 20px;
+				}
+			</style>
+			<div class="choices">
+				<button onClick={ onHit(shoe, hand) } type="button">Hit</button>
+				<button type="button">Stay</button>
+			</div>
+		</div>
 	</div>
 }

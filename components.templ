@@ -1,22 +1,37 @@
 package main
 
-import "fmt"
-
-templ card_image(suit Suit, variant SuitVariant) {
-	{{ file := fmt.Sprintf("/assets/%s_%s.svg", suit.String(), variant.String()) }}
-	<img src={ file }/>
+templ head() {
+	<head>
+		<meta charset="UTF-8"/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Blackjack Trainer</title>
+		<style>
+        	body {
+        	    padding: 25px;
+        	    background-color: #24273a;
+        	    color: black;
+        	    font-size: 25px;
+        	}
+			p {
+				color: #cad3f5
+			}
+    	</style>
+	</head>
 }
 
-templ topnav() {
+templ navbar() {
 	<style>
 		/* Add a black background color to the top navigation */
-		.topnav {
+		.navbar {
 		  background-color: #363a4f;
 		  overflow: hidden;
 		}
 		
 		/* Style the links inside the navigation bar */
-		.topnav a {
+		.navbar a {
 		  float: left;
 		  color: #8aadf4;
 		  text-align: center;
@@ -26,19 +41,28 @@ templ topnav() {
 		}
 		
 		/* Change the color of links on hover */
-		.topnav a:hover {
+		.navbar a:hover {
 		  background-color: #91d7e3;
 		  color: black;
 		}
 		
 		/* Add a color to the active/current link */
-		.topnav a.active {
+		.navbar a.active {
 		  background-color: #b7bdf8;
 		  color: white;
 		}
 	</style>
-	<div class="topnav">
+	<div class="navbar">
 		<a href="/">Home</a>
 		<a href="/basic_play">Basic Play</a>
 	</div>
+}
+
+templ card_image(card Card) {
+	<img src={ card.file() } style="height: 50%; width: 50%; object-fit: contain"/>
+}
+
+script onHit(shoe Shoe, hand Hand) {
+	console.log(hand);
+	{{ hand.hit(shoe) }}
 }
