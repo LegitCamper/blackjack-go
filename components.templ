@@ -7,8 +7,38 @@ templ card_image(suit Suit, variant SuitVariant) {
 	<img src={ file }/>
 }
 
-templ navbar() {
-	<div class="nav_bar">
-		<a href="#intro">Home</a>
+templ topnav() {
+	<style>
+		/* Add a black background color to the top navigation */
+		.topnav {
+		  background-color: #363a4f;
+		  overflow: hidden;
+		}
+		
+		/* Style the links inside the navigation bar */
+		.topnav a {
+		  float: left;
+		  color: #8aadf4;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		  font-size: 17px;
+		}
+		
+		/* Change the color of links on hover */
+		.topnav a:hover {
+		  background-color: #91d7e3;
+		  color: black;
+		}
+		
+		/* Add a color to the active/current link */
+		.topnav a.active {
+		  background-color: #b7bdf8;
+		  color: white;
+		}
+	</style>
+	<div class="topnav">
+		<a href="/">Home</a>
+		<a href="/basic_play">Basic Play</a>
 	</div>
 }

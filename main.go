@@ -10,6 +10,7 @@ import (
 
 func main() {
 	http.Handle("/", templ.Handler(home()))
+	http.Handle("/basic_play", templ.Handler(basic_play()))
 
 	assets := http.FileServer(http.Dir("assets/"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", assets))

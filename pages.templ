@@ -1,7 +1,43 @@
 package main
 
+templ head() {
+	<head>
+		<meta charset="UTF-8"/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Blackjack Trainer</title>
+		<style>
+        	body {
+        	    padding: 25px;
+        	    background-color: #24273a;
+        	    color: black;
+        	    font-size: 25px;
+        	}
+			p {
+				color: #cad3f5
+			}
+    	</style>
+	</head>
+}
+
 templ home() {
-	@navbar()
-	<p>"Welcome to blackjsck assistant and trainer"</p>
-	@card_image(Clubs, Ten)
+	@head()
+	@topnav()
+	<style>
+		.home_main{
+			display: flex;
+  			justify-content: center;
+  			align-items: center;
+		}
+	</style>
+	<div class="home_main">
+		<p>"Welcome to blackjsck assistant and trainer"</p>
+	</div>
+}
+
+templ basic_play() {
+	@head()
+	@topnav()
 }
