@@ -1,10 +1,14 @@
 package main
 
-import (
-  "fmt"
-)
+import "fmt"
 
 templ card_image(suit Suit, variant SuitVariant) {
-  {{ file := fmt.Sprintf("/assets/%s_%s.svg", suit.String(), variant.String()) }}
-  <img src={ file }> 
+	{{ file := fmt.Sprintf("/assets/%s_%s.svg", suit.String(), variant.String()) }}
+	<img src={ file }/>
+}
+
+templ navbar() {
+	<div class="nav_bar">
+		<a href="#intro">Home</a>
+	</div>
 }
