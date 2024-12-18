@@ -1,4 +1,4 @@
-module github.com/a-h/templ-examples/hello-world
+module blackjack
 
 go 1.23.3
 

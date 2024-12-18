@@ -40,4 +40,15 @@ templ home() {
 templ basic_play() {
 	@head()
 	@topnav()
+	<p>basic play</p>
+	@card_image(random_suit(), random_suit_variant())
+	<style>
+		div {
+			position:absolute;
+			bottom:0;
+		}
+	</style>
+	<div class="choices">
+		<button type="button">Click Me!</button>
+	</div>
 }
