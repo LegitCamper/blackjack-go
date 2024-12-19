@@ -15,57 +15,42 @@ templ home() {
 	</div>
 }
 
-templ basic_play() {
+templ basic_play(hand Hand, shoe Shoe) {
 	@head()
 	@navbar()
-	{{
-		shoe := new_shoe(6)
-		hand := new_hand()
-		hand.deal(&shoe)
-	}}
-	<style>
-		.center {
-			display: flex;
-  			justify-content: center;
-  			align-items: center;
-		}
-	</style>
-	<div class="center">
-		<div>
-			<h3>practice basic play:</h3>
-			@show_hand(hand)
-			<style>
-				.choices {
-					display: flex;
-  					justify-content: center;
-  					align-items: center;
-				}
-				.choices button {
-					// background-color: #04AA6D; /* Green */
-  					border: none;
-  					// color: white;
-  					padding: 20px 32px;
-  					text-align: center;
-  					font-size: 16px;
-					margin: 20px;
-				}
-			</style>
-			<div class="choices">
-				<script type="text/javascript">
-					function onHit(hand, shoe)  {
-						var hand = hand;
-						hand.hit(shoe);
+	<body>
+		<style>
+			.center {
+				display: flex;
+  				justify-content: center;
+  				align-items: center;
+			}
+		</style>
+		<div class="center">
+			<div>
+				<h3>practice basic play:</h3>
+				@show_hand(hand)
+				<style>
+					.choices {
+						display: flex;
+  						justify-content: center;
+  						align-items: center;
 					}
-				</script>
-				<button onClick="onHit(hand, shoe)" type="button">Hit</button>
-				<button type="button">Stay</button>
+					.choices button {
+						// background-color: #04AA6D; /* Green */
+  						border: none;
+  						// color: white;
+  						padding: 20px 32px;
+  						text-align: center;
+  						font-size: 16px;
+						margin: 20px;
+					}
+				</style>
+				<div class="choices">
+					<button type="button" hx-target="#hand" hx-post="/basic_play/hit">Hit</button>
+					<button type="button" hx-target="#hand" hx-post="/basic_play/stay">Stay</button>
+				</div>
 			</div>
 		</div>
-	</div>
-}
-
-script onHit(hand Hand, shoe Shoe) {
-	const chart = LightweightCharts.createChart(document.body, { width: 400, height: 300 });
-	const lineSeries = chart.addLineSeries();
-	lineSeries.setData(data);
+	</body>
 }
