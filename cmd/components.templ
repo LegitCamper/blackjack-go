@@ -59,10 +59,18 @@ templ navbar() {
 }
 
 templ card_image(card Card) {
-	<img src={ card.file() } style="height: 50%; width: 50%; object-fit: contain"/>
+	<img src={ card.file() } style="height: 35%; width: 35%; object-fit: contain"/>
 }
 
-script onHit(shoe Shoe, hand Hand) {
-	console.log(hand);
-	hand.hit(shoe);
+templ show_hand(hand Hand) {
+	<style>
+		.hand  {
+			padding 20px;
+		}
+	</style>
+	<div class="hand">
+		for _, card := range hand.cards {
+			@card_image(card)
+		}
+	</div>
 }

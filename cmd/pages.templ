@@ -33,16 +33,7 @@ templ basic_play() {
 	<div class="center">
 		<div>
 			<h3>practice basic play:</h3>
-			<style>
-				.hand  {
-					padding 20px;
-				}
-			</style>
-			<div class="hand">
-				for _, card := range hand.cards {
-					@card_image(card)
-				}
-			</div>
+			@show_hand(hand)
 			<style>
 				.choices {
 					display: flex;
@@ -60,9 +51,21 @@ templ basic_play() {
 				}
 			</style>
 			<div class="choices">
-				<button onClick={ onHit(shoe, hand) } type="button">Hit</button>
+				<script type="text/javascript">
+					function onHit(hand, shoe)  {
+						var hand = hand;
+						hand.hit(shoe);
+					}
+				</script>
+				<button onClick="onHit(hand, shoe)" type="button">Hit</button>
 				<button type="button">Stay</button>
 			</div>
 		</div>
 	</div>
+}
+
+script onHit(hand Hand, shoe Shoe) {
+	const chart = LightweightCharts.createChart(document.body, { width: 400, height: 300 });
+	const lineSeries = chart.addLineSeries();
+	lineSeries.setData(data);
 }
