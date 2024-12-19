@@ -28,7 +28,7 @@ func (s Suit) String() string {
 	return "unknown"
 }
 
-func random_suit() Suit {
+func randomSuit() Suit {
 	suit := rand.Int()
 	switch suit {
 	case 0:
@@ -126,7 +126,7 @@ func (s SuitVariant) String() string {
 	return "unknown"
 }
 
-func random_suit_variant() SuitVariant {
+func randomSuitVariant() SuitVariant {
 	variant := rand.IntN(12)
 	switch variant {
 	case 0:
@@ -169,10 +169,10 @@ func (c Card) file() string {
 	return fmt.Sprintf("/assets/%s_%s.svg", c.suit.String(), c.variant.String())
 }
 
-func random_card() Card {
+func randomCard() Card {
 	return Card{
-		suit:    random_suit(),
-		variant: random_suit_variant(),
+		suit:    randomSuit(),
+		variant: randomSuitVariant(),
 	}
 }
 
@@ -207,7 +207,7 @@ func (s *Shoe) remove() Card {
 	}
 }
 
-func new_shoe(decks int) Shoe {
+func newShoe(decks int) Shoe {
 	cards := []Card{}
 
 	for d := 0; d < decks; d++ {

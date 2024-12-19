@@ -15,10 +15,10 @@ func main() {
 	http.Handle("GET /assets/", http.StripPrefix("/assets/", assets))
 
 	hand := new_hand()
-	shoe := new_shoe(6)
+	shoe := newShoe(6)
 	http.HandleFunc("GET /basic_play", func(w http.ResponseWriter, r *http.Request) {
 		hand.deal(&shoe)
-		basic_play(hand, shoe).Render(r.Context(), w)
+		basic_play(hand).Render(r.Context(), w)
 	})
 	http.HandleFunc("POST /basic_play/hit", func(w http.ResponseWriter, r *http.Request) {
 		hand.hit(&shoe)
